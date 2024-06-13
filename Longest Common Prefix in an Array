@@ -1,0 +1,36 @@
+class Solution{
+  
+    
+    string compare(string a,string b){
+        int i=0, j=0;
+        string ret= "";
+        while(i < a.length() && j < b.length()){
+           if (a[i] == b[j]) {
+            ret += a[i];
+        } else {
+            break;
+        }
+        i++;
+        j++;
+    }
+    return ret;
+}
+    
+    public:
+    string longestCommonPrefix (string arr[], int n)
+    {
+        string ans = arr[0];
+        
+        for(int i=1;i<n;i++){
+            string x = compare(ans , arr[i]);
+            if(x == ""){
+                return "-1";
+            }
+        
+        ans=x;
+        // your code here
+    }
+    return  ans;
+    
+}
+};

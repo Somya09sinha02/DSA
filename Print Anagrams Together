@@ -13,9 +13,100 @@ class Solution {
         }
         
         vector<vector<string>>result;
+        //pushback all the hash into group by the sorting from second character
+
         
         for(auto group:hash){
             result.push_back(group.second);
         }
         return result;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Problem Recap
+Given an array of strings, we want to group all the strings that are anagrams of each other. Anagrams are words that have the same letters in any order (e.g., "act," "cat," and "tac").
+
+### Example
+Suppose we have the input array:
+```cpp
+arr = {"act", "god", "cat", "dog", "tac"};
+```
+
+Our goal is to group all the words that are anagrams of each other. The expected output for this example would be:
+```
+act cat tac
+god dog
+```
+
+### Step-by-Step Explanation
+
+#### Step 1: Initialize a Map for Anagram Groups
+We'll use an unordered map (`unordered_map<string, vector<string>>`) where:
+- The **key** is a sorted version of the word.
+- The **value** is a vector of words that match that sorted version.
+
+#### Step 2: Sort Each Word to Find Its Anagram Signature
+For each word in the array, we:
+1. Sort its characters alphabetically. This sorted version of the word serves as a unique "signature" or "key" for identifying anagrams.
+2. Store the original word under this sorted key in the map.
+
+Let’s apply this to each word in the array:
+
+- **"act"**:
+  - Sort the characters to get `"act"`.
+  - Add `"act"` to `anagramGroups["act"]`.
+
+- **"god"**:
+  - Sort the characters to get `"dgo"`.
+  - Add `"god"` to `anagramGroups["dgo"]`.
+
+- **"cat"**:
+  - Sort the characters to get `"act"`.
+  - Add `"cat"` to `anagramGroups["act"]` (since "act" is already a key, this adds "cat" to the existing list).
+
+- **"dog"**:
+  - Sort the characters to get `"dgo"`.
+  - Add `"dog"` to `anagramGroups["dgo"]` (adds "dog" to the list for key `"dgo"`).
+
+- **"tac"**:
+  - Sort the characters to get `"act"`.
+  - Add `"tac"` to `anagramGroups["act"]` (adds "tac" to the list for key `"act"`).
+
+After processing all words, the `anagramGroups` map will look like this:
+```cpp
+{
+    "act": {"act", "cat", "tac"},
+    "dgo": {"god", "dog"}
+}
+```
+
+#### Step 3: Prepare the Result Vector
+The map now contains all groups of anagrams. We need to:
+1. Iterate over each entry in `anagramGroups`.
+2. Add each list of anagrams to the `result` vector.
+
+The `result` vector will then look like this:
+```cpp
+result = {{"act", "cat", "tac"}, {"god", "dog"}};
+```
+
+#### Step 4: Output the Result
+Finally, we print each group in `result` on a new line:
+```
+act cat tac
+god dog
+```
+

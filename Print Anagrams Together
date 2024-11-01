@@ -1,0 +1,21 @@
+class Solution {
+  public:
+    vector<vector<string>> anagrams(vector<string>& arr) {
+        unordered_map<string , vector<string>>hash;
+        
+        for(string word: arr){
+            //sort each charcater of the word like "cat" as "act"
+            string sorted = word;
+            sort(sorted.begin() , sorted.end());
+            
+            //add all the words in the hash
+            hash[sorted].push_back(word);
+        }
+        
+        vector<vector<string>>result;
+        
+        for(auto group:hash){
+            result.push_back(group.second);
+        }
+        return result;
+    }
